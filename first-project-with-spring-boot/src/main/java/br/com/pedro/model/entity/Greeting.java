@@ -6,7 +6,7 @@ package br.com.pedro.model.entity;
 
 /**
  *
- * @author Pedro Vitor
+ * @author Pedro Vitor Nunes Arruda
  */
 public class Greeting {
     
