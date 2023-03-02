@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  *
- * @author Pedro Vitor
+ * @author Pedro Vitor Nunes Arruda Nunes Arruda
  */
 @SpringBootApplication
 public class Startup {

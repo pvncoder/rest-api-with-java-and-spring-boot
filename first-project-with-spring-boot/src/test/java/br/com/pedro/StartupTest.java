@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
- * @author Pedro Vitor
+ * @author Pedro Vitor Nunes Arruda
  */
 @SpringBootTest
 class StartupTest {

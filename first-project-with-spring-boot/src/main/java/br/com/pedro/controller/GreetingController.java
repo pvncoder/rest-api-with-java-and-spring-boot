@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Pedro Vitor
+ * @author Pedro Vitor Nunes Arruda
  */
 @RestController
 public class GreetingController {
