@@ -9,8 +9,8 @@
     <properties>
         <java.version>19</java.version>
         <log4j.version>2.20.0</log4j.version>
+        <liquibase.version>4.19.1</liquibase.version>
         <dozer-mapper.version>6.4.0</dozer-mapper.version>
-        <postgresql-driver.version>42.5.4</postgresql-driver.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -35,7 +35,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>${postgresql-driver.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.dozermapper</groupId>
@@ -69,6 +68,28 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+                <configuration>
+                    <propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
+                    <diffChangeLogFile>src/main/resources/db/changes/db-changelog-diff.xml</diffChangeLogFile>
+                    <outputChangeLogFile>src/main/resources/db/changes/db-changelog-output.xml</outputChangeLogFile>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-core</artifactId>
+                        <version>${liquibase.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.liquibase.ext</groupId>
+                        <artifactId>liquibase-hibernate6</artifactId>
+                        <version>${liquibase.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

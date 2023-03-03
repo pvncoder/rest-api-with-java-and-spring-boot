@@ -43,4 +43,36 @@
             <exec.executable>java</exec.executable>
         </properties>
     </action>
+    <!-- Liquibase -->
+    <action>
+        <actionName>CUSTOM-Liquibase Diff</actionName>
+        <displayName>Liquibase Diff</displayName>
+        <goals>
+            <goal>liquibase:diff</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-Liquibase Rollback</actionName>
+        <displayName>Liquibase Rollback</displayName>
+        <goals>
+            <goal>liquibase:rollback</goal>
+        </goals>
+        <properties>
+            <liquibase.rollbackCount>1</liquibase.rollbackCount>
+        </properties>
+    </action>
+    <action>
+        <actionName>CUSTOM-Liquibase Status</actionName>
+        <displayName>Liquibase Status</displayName>
+        <goals>
+            <goal>liquibase:status</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-Liquibase Update</actionName>
+        <displayName>Liquibase Update</displayName>
+        <goals>
+            <goal>liquibase:update</goal>
+        </goals>
+    </action>
 </actions>

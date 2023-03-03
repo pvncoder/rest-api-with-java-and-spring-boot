@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.model.v1.dto;
+package br.com.pedro.model.dto.v1;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author Pedro Vitor Nunes Arruda
  */
-public class PersonDTO {
+public class PersonV1DTO {
     
     // Variables
     private Long id;
@@ -20,9 +20,9 @@ public class PersonDTO {
     private String gender;
     
     // Constructors
-    public PersonDTO() {}
+    public PersonV1DTO() {}
 
-    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonV1DTO(Long id, String firstName, String lastName, String address, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -90,7 +90,7 @@ public class PersonDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PersonDTO other = (PersonDTO) obj;
+        final PersonV1DTO other = (PersonV1DTO) obj;
         return Objects.equals(this.id, other.id);
     }
 }

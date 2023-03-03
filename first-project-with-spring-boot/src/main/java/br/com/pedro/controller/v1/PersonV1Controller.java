@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.controller;
+package br.com.pedro.controller.v1;
 
-import br.com.pedro.model.v1.dto.PersonDTO;
+import br.com.pedro.model.dto.v1.PersonV1DTO;
 import br.com.pedro.service.PersonService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,40 +23,40 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Pedro Vitor Nunes Arruda
  */
-@RequestMapping("/persons")
+@RequestMapping("/api/v1/persons")
 @RestController
-public class PersonController {
+public class PersonV1Controller {
 
     @Autowired // Annotation to inject a class
     private PersonService personService;
 
     // GET
     @GetMapping(value = "/{idPerson}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonDTO findById(@PathVariable(name = "idPerson") Long idPerson) {
-        return personService.findById(idPerson);
+    public PersonV1DTO findById(@PathVariable(name = "idPerson") Long idPerson) {
+        return personService.findByIdV1(idPerson);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PersonDTO> findAll() {
-        return personService.findAll();
+    public List<PersonV1DTO> findAll() {
+        return personService.findAllV1();
     }
 
     // POST
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonDTO create(@RequestBody PersonDTO person) {
-        return personService.create(person);
+    public PersonV1DTO create(@RequestBody PersonV1DTO person) {
+        return personService.createV1(person);
     }
 
     // PUT
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonDTO update(@RequestBody PersonDTO person) {
-        return personService.update(person);
+    public PersonV1DTO update(@RequestBody PersonV1DTO person) {
+        return personService.updateV1(person);
     }
 
     // DELETE
     @DeleteMapping(value = "/{idPerson}")
     public ResponseEntity<?> delete(@PathVariable(name = "idPerson") Long idPerson) {
-        personService.delete(idPerson);
+        personService.deleteV1(idPerson);
         return ResponseEntity.noContent().build();
     }
 }
