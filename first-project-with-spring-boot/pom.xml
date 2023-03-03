@@ -8,6 +8,9 @@
     <artifactId>first-project-with-spring-boot</artifactId>
     <properties>
         <java.version>19</java.version>
+        <log4j.version>2.20.0</log4j.version>
+        <dozer-mapper.version>6.4.0</dozer-mapper.version>
+        <postgresql-driver.version>42.5.4</postgresql-driver.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,13 +25,30 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math4-core</artifactId>
-            <version>4.0-beta1</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dozermapper</groupId>
+            <artifactId>dozer-core</artifactId>
+            <version>${dozer-mapper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
         </dependency>
         <!-- Test -->
         <dependency>
