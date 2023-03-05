@@ -57,7 +57,6 @@ public class PersonService {
     
     public List<PersonV1DTO> findAllV1() {
         LOGGER.info("Finding all persons");
-        return DozerMapper.parseListObjects(personRepository.findAll(),
-            PersonV1DTO.class);
+        return DozerMapper.parseListObjects(personRepository.findAll(), PersonV1DTO.class);
     }
 }

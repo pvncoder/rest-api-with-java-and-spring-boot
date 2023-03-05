@@ -6,9 +6,9 @@ package br.com.pedro.controller.v1;
 
 import br.com.pedro.model.dto.v1.PersonV1DTO;
 import br.com.pedro.service.PersonService;
+import br.com.pedro.util.MediaType;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,24 +31,24 @@ public class PersonV1Controller {
     private PersonService personService;
 
     // GET
-    @GetMapping(value = "/{idPerson}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{idPerson}", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public PersonV1DTO findById(@PathVariable(name = "idPerson") Long idPerson) {
         return personService.findByIdV1(idPerson);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public List<PersonV1DTO> findAll() {
         return personService.findAllV1();
     }
 
     // POST
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}, produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public PersonV1DTO create(@RequestBody PersonV1DTO person) {
         return personService.createV1(person);
     }
 
     // PUT
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML}, produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YAML})
     public PersonV1DTO update(@RequestBody PersonV1DTO person) {
         return personService.updateV1(person);
     }
