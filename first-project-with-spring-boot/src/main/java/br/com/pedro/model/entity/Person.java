@@ -50,11 +50,11 @@ public class Person {
     }
     
     // General
-    public void updateValues(PersonV1DTO personDTO) {
-        this.firstName = personDTO.getFirstName();
-        this.lastName = personDTO.getLastName();
-        this.address = personDTO.getAddress();
-        this.gender = personDTO.getGender();
+    public void updateValues(PersonV1DTO personV1DTO) {
+        this.firstName = personV1DTO.getFirstName();
+        this.lastName = personV1DTO.getLastName();
+        this.address = personV1DTO.getAddress();
+        this.gender = personV1DTO.getGender();
     }
 
     // Getters and setters

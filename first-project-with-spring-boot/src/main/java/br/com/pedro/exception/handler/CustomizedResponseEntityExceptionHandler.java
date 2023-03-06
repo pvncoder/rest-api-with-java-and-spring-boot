@@ -5,6 +5,7 @@
 package br.com.pedro.exception.handler;
 
 import br.com.pedro.exception.ExceptionResponse;
+import br.com.pedro.exception.RequiredObjectIsNullException;
 import br.com.pedro.exception.ResourceNotFoundException;
 import br.com.pedro.exception.UnsupportedMathOperationException;
 import java.util.Date;
@@ -41,5 +42,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(ResourceNotFoundException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler(RequiredObjectIsNullException.class)
+    public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(RequiredObjectIsNullException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }

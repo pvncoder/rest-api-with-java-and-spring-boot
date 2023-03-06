@@ -4,13 +4,15 @@
  */
 package br.com.pedro.model.dto.v1;
 
+import java.io.Serializable;
 import java.util.Objects;
+import org.springframework.hateoas.RepresentationModel;
 
 /**
  *
  * @author Pedro Vitor Nunes Arruda
  */
-public class PersonV1DTO {
+public class PersonV1DTO extends RepresentationModel<PersonV1DTO> implements Serializable {
     
     // Variables
     private Long id;
