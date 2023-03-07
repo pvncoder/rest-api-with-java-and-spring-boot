@@ -6,6 +6,7 @@ package br.com.pedro.controller.v1;
 
 import br.com.pedro.service.CalculatorService;
 import br.com.pedro.util.ArithmeticUtil;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Pedro Vitor Nunes Arruda
  */
-@RequestMapping("/api/v1/calculator")
+@Hidden
 @RestController
+@RequestMapping("/api/v1/calculator")
 public class CalculatorV1Controller {
     
     // GET

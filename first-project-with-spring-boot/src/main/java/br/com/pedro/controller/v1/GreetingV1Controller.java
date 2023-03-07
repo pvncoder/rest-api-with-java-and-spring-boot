@@ -5,6 +5,7 @@
 package br.com.pedro.controller.v1;
 
 import br.com.pedro.model.entity.Greeting;
+import io.swagger.v3.oas.annotations.Hidden;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Pedro Vitor Nunes Arruda
  */
-@RequestMapping("/api/v1/greeting")
+@Hidden
 @RestController
+@RequestMapping("/api/v1/greeting")
 public class GreetingV1Controller {
     
     private static final String TEMPLATE = "Hello %s!";

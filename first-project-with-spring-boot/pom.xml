@@ -11,6 +11,7 @@
         <log4j.version>2.20.0</log4j.version>
         <liquibase.version>4.19.1</liquibase.version>
         <dozer-mapper.version>6.4.0</dozer-mapper.version>
+        <springdoc.version>2.0.0</springdoc.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -31,6 +32,15 @@
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
