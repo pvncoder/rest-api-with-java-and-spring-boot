@@ -159,9 +159,7 @@ class PersonServiceTest {
             assertNotNull(personV1DTO);
             assertNotNull(personV1DTO.getId());
             assertNotNull(personV1DTO.getLinks());
-            
-            System.out.println("personV1DTO " + i + ": " + personV1DTO);
-            System.out.println("personV1DTO " + i + ": " + personV1DTO.getId());
+
             String link = "links: [</api/v1/persons/".concat(String.valueOf(personV1DTO.getId())).concat(">;rel=\"self\"]");
             assertTrue(personV1DTO.toString().contains(link));
             assertEquals("Address Test".concat(Integer.toString(i)), personV1DTO.getAddress());

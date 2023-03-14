@@ -8,6 +8,7 @@ import br.com.pedro.model.dto.v1.PersonV1DTO;
 
 public class MockPerson {
 
+    // General
     public Person mockEntity() {
         return mockEntity(0);
     }
