@@ -4,7 +4,7 @@
  */
 package br.com.pedro.model.entity;
 
-import br.com.pedro.model.dto.v1.PersonV1DTO;
+import br.com.pedro.model.v1.dto.PersonDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,11 +50,11 @@ public class Person {
     }
     
     // General
-    public void updateValues(PersonV1DTO personV1DTO) {
-        this.firstName = personV1DTO.getFirstName();
-        this.lastName = personV1DTO.getLastName();
-        this.address = personV1DTO.getAddress();
-        this.gender = personV1DTO.getGender();
+    public void updateValues(PersonDTO personDTO) {
+        this.firstName = personDTO.getFirstName();
+        this.lastName = personDTO.getLastName();
+        this.address = personDTO.getAddress();
+        this.gender = personDTO.getGender();
     }
 
     // Getters and setters

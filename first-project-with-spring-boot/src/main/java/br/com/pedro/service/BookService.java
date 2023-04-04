@@ -4,13 +4,13 @@
  */
 package br.com.pedro.service;
 
-import br.com.pedro.controller.v1.BookV1Controller;
+import br.com.pedro.v1.controller.BookController;
 import br.com.pedro.exception.RequiredObjectIsNullException;
 import br.com.pedro.exception.ResourceNotFoundException;
 import br.com.pedro.mapper.DozerMapper;
 import br.com.pedro.model.entity.Book;
 import br.com.pedro.model.repository.BookRepository;
-import br.com.pedro.model.dto.v1.BookV1DTO;
+import br.com.pedro.model.v1.dto.BookDTO;
 import java.util.List;
 import static java.util.Objects.isNull;
 import org.apache.commons.collections.CollectionUtils;
@@ -34,68 +34,68 @@ public class BookService {
     private BookRepository bookRepository;
     
     // General
-    public BookV1DTO createV1(BookV1DTO bookV1DTO) {
+    public BookDTO create(BookDTO bookDTO) {
         LOGGER.info("Creating one book");
-        if (isNull(bookV1DTO)) {
+        if (isNull(bookDTO)) {
             throw new RequiredObjectIsNullException();
         }
-        Book bookToSave = DozerMapper.parseObject(bookV1DTO, Book.class);
+        Book bookToSave = DozerMapper.parseObject(bookDTO, Book.class);
         Book savedBook = bookRepository.save(bookToSave);
-        BookV1DTO bookV1DTOSaved = DozerMapper.parseObject(savedBook, BookV1DTO.class);
-        addCreateIdV1HATEOS(bookV1DTOSaved);
-        return bookV1DTOSaved;
+        BookDTO bookDTOSaved = DozerMapper.parseObject(savedBook, BookDTO.class);
+        addCreateIdHATEOS(bookDTOSaved);
+        return bookDTOSaved;
     }
     
-    public BookV1DTO updateV1(BookV1DTO bookV1DTO) {
+    public BookDTO update(BookDTO bookDTO) {
         LOGGER.info("Updating one book");
-        if (isNull(bookV1DTO)) {
+        if (isNull(bookDTO)) {
             throw new RequiredObjectIsNullException();
         }
-        Book bookEntity = bookRepository.findById(bookV1DTO.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
-        bookEntity.updateValues(bookV1DTO);
+        Book bookEntity = bookRepository.findById(bookDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        bookEntity.updateValues(bookDTO);
         Book savedBook = bookRepository.save(bookEntity);
-        BookV1DTO bookV1DTOUpdated = DozerMapper.parseObject(savedBook, BookV1DTO.class);
-        addUpdateV1HATEOS(bookV1DTOUpdated);
-        return bookV1DTOUpdated;
+        BookDTO bookDTOUpdated = DozerMapper.parseObject(savedBook, BookDTO.class);
+        addUpdateHATEOS(bookDTOUpdated);
+        return bookDTOUpdated;
     }
     
-    public void deleteV1(Long idBook) {
+    public void delete(Long idBook) {
         LOGGER.info("Deleting one book");
         Book bookEntity = bookRepository.findById(idBook).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         bookRepository.delete(bookEntity);
     }
     
-    public BookV1DTO findByIdV1(Long idBook) {
+    public BookDTO findById(Long idBook) {
         LOGGER.info("Finding one book");
-        BookV1DTO bookV1DTO = DozerMapper.parseObject(bookRepository.findById(idBook)
-            .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID")), BookV1DTO.class);
-        addFindByIdV1HATEOS(idBook, bookV1DTO);
-        return bookV1DTO;
+        BookDTO bookDTO = DozerMapper.parseObject(bookRepository.findById(idBook)
+            .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID")), BookDTO.class);
+        addFindByIdHATEOS(idBook, bookDTO);
+        return bookDTO;
     }
     
-    public List<BookV1DTO> findAllV1() {
+    public List<BookDTO> findAll() {
         LOGGER.info("Finding all books");
-        List<BookV1DTO> booksV1DTO = DozerMapper.parseListObjects(bookRepository.findAll(), BookV1DTO.class);
-        addAllV1HATEOS(booksV1DTO);
-        return booksV1DTO;
+        List<BookDTO> booksDTO = DozerMapper.parseListObjects(bookRepository.findAll(), BookDTO.class);
+        addAllHATEOS(booksDTO);
+        return booksDTO;
     }
     
     // Links
-    private void addUpdateV1HATEOS(BookV1DTO bookV1DTO) {
-        addFindByIdV1HATEOS(bookV1DTO.getId(), bookV1DTO);
+    private void addUpdateHATEOS(BookDTO bookDTO) {
+        addFindByIdHATEOS(bookDTO.getId(), bookDTO);
     }
     
-    private void addCreateIdV1HATEOS(BookV1DTO bookV1DTO) {
-        addFindByIdV1HATEOS(bookV1DTO.getId(), bookV1DTO);
+    private void addCreateIdHATEOS(BookDTO bookDTO) {
+        addFindByIdHATEOS(bookDTO.getId(), bookDTO);
     }
     
-    private void addAllV1HATEOS(List<BookV1DTO> booksV1DTO) {
-        if (CollectionUtils.isNotEmpty(booksV1DTO)) {
-            booksV1DTO.forEach(bookV1DTO -> addFindByIdV1HATEOS(bookV1DTO.getId(), bookV1DTO));
+    private void addAllHATEOS(List<BookDTO> booksDTO) {
+        if (CollectionUtils.isNotEmpty(booksDTO)) {
+            booksDTO.forEach(bookDTO -> addFindByIdHATEOS(bookDTO.getId(), bookDTO));
         }
     }
     
-    private void addFindByIdV1HATEOS(Long id, BookV1DTO bookV1DTO) {
-        bookV1DTO.add(linkTo(methodOn(BookV1Controller.class).findById(id)).withSelfRel());
+    private void addFindByIdHATEOS(Long id, BookDTO bookDTO) {
+        bookDTO.add(linkTo(methodOn(BookController.class).findById(id)).withSelfRel());
     }
 }

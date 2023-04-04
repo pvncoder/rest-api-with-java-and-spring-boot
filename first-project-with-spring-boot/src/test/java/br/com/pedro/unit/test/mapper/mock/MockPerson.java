@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.pedro.model.entity.Person;
-import br.com.pedro.model.dto.v1.PersonV1DTO;
+import br.com.pedro.model.v1.dto.PersonDTO;
 
 public class MockPerson {
 
@@ -13,7 +13,7 @@ public class MockPerson {
         return mockEntity(0);
     }
 
-    public PersonV1DTO mockDTO() {
+    public PersonDTO mockDTO() {
         return mockDTO(0);
     }
 
@@ -25,8 +25,8 @@ public class MockPerson {
         return persons;
     }
 
-    public List<PersonV1DTO> mockDTOList() {
-        List<PersonV1DTO> persons = new ArrayList<>();
+    public List<PersonDTO> mockDTOList() {
+        List<PersonDTO> persons = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             persons.add(mockDTO(i));
         }
@@ -43,8 +43,8 @@ public class MockPerson {
         return person;
     }
 
-    public PersonV1DTO mockDTO(Integer number) {
-        PersonV1DTO person = new PersonV1DTO();
+    public PersonDTO mockDTO(Integer number) {
+        PersonDTO person = new PersonDTO();
         person.setId(number.longValue());
         person.setFirstName("First Name Test" + number);
         person.setLastName("Last Name Test" + number);

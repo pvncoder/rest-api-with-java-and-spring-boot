@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.model.dto.v1;
+package br.com.pedro.model.v1.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,7 +12,7 @@ import org.springframework.hateoas.RepresentationModel;
  *
  * @author Pedro Vitor Nunes Arruda
  */
-public class PersonV1DTO extends RepresentationModel<PersonV1DTO> implements Serializable {
+public class PersonDTO extends RepresentationModel<PersonDTO> implements Serializable {
     
     // Variables
     private Long id;
@@ -22,9 +22,9 @@ public class PersonV1DTO extends RepresentationModel<PersonV1DTO> implements Ser
     private String gender;
     
     // Constructors
-    public PersonV1DTO() {}
+    public PersonDTO() {}
 
-    public PersonV1DTO(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -92,7 +92,7 @@ public class PersonV1DTO extends RepresentationModel<PersonV1DTO> implements Ser
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PersonV1DTO other = (PersonV1DTO) obj;
+        final PersonDTO other = (PersonDTO) obj;
         return Objects.equals(this.id, other.id);
     }
 }

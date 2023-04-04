@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.controller.v1;
+package br.com.pedro.v1.controller;
 
 import br.com.pedro.model.entity.Greeting;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Hidden
 @RestController
 @RequestMapping("/api/v1/greeting")
-public class GreetingV1Controller {
+public class GreetingController {
     
     private static final String TEMPLATE = "Hello %s!";
     private final AtomicLong counter = new AtomicLong(0);

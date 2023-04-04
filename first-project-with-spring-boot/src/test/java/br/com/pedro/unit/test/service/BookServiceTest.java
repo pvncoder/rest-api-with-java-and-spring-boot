@@ -1,7 +1,7 @@
 package br.com.pedro.unit.test.service;
 
 import br.com.pedro.exception.RequiredObjectIsNullException;
-import br.com.pedro.model.dto.v1.BookV1DTO;
+import br.com.pedro.model.v1.dto.BookDTO;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -49,7 +49,7 @@ class BookServiceTest {
 
         when(bookRepository.findById(1L)).thenReturn(Optional.of(entity));
 
-        var result = bookService.findByIdV1(1L);
+        var result = bookService.findById(1L);
         assertNotNull(result);
         assertNotNull(result.getId());
         assertNotNull(result.getLinks());
@@ -69,12 +69,12 @@ class BookServiceTest {
         Book persisted = entity;
         persisted.setId(1L);
 
-        BookV1DTO bookV1DTO = mockBook.mockDTO(1);
-        bookV1DTO.setId(1L);
+        BookDTO bookDTO = mockBook.mockDTO(1);
+        bookDTO.setId(1L);
 
         when(bookRepository.save(entity)).thenReturn(persisted);
 
-        var result = bookService.createV1(bookV1DTO);
+        var result = bookService.create(bookDTO);
 
         assertNotNull(result);
         assertNotNull(result.getId());
@@ -89,7 +89,7 @@ class BookServiceTest {
 
     @Test
     void testCreateWithNullBook() {
-        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> bookService.createV1(null));
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> bookService.create(null));
 
         String expectedMessage = "It is not allowed to persist a null object";
         String actualMessage = exception.getMessage();
@@ -104,13 +104,13 @@ class BookServiceTest {
         Book persisted = entity;
         persisted.setId(1L);
 
-        BookV1DTO dto = mockBook.mockDTO(1);
+        BookDTO dto = mockBook.mockDTO(1);
         dto.setId(1L);
 
         when(bookRepository.findById(1L)).thenReturn(Optional.of(entity));
         when(bookRepository.save(entity)).thenReturn(persisted);
 
-        var result = bookService.updateV1(dto);
+        var result = bookService.update(dto);
 
         assertNotNull(result);
         assertNotNull(result.getId());
@@ -125,7 +125,7 @@ class BookServiceTest {
 
     @Test
     void testUpdateWithNullBook() {
-        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> bookService.updateV1(null));
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> bookService.update(null));
 
         String expectedMessage = "It is not allowed to persist a null object";
         String actualMessage = exception.getMessage();
@@ -140,7 +140,7 @@ class BookServiceTest {
 
         when(bookRepository.findById(1L)).thenReturn(Optional.of(entity));
 
-        bookService.deleteV1(1L);
+        bookService.delete(1L);
     }
 
     @Test
@@ -149,24 +149,24 @@ class BookServiceTest {
 
         when(bookRepository.findAll()).thenReturn(list);
 
-        var people = bookService.findAllV1();
+        var people = bookService.findAll();
 
         assertNotNull(people);
         assertEquals(5, people.size());
         
         for (int i = 0; i < people.size(); i++) {
-            BookV1DTO bookV1DTO = people.get(i);
+            BookDTO bookDTO = people.get(i);
             
-            assertNotNull(bookV1DTO);
-            assertNotNull(bookV1DTO.getId());
-            assertNotNull(bookV1DTO.getLinks());
+            assertNotNull(bookDTO);
+            assertNotNull(bookDTO.getId());
+            assertNotNull(bookDTO.getLinks());
 
-            String link = "links: [</api/v1/books/".concat(String.valueOf(bookV1DTO.getId())).concat(">;rel=\"self\"]");
-            assertTrue(bookV1DTO.toString().contains(link));
-            assertEquals("Title Test".concat(Integer.toString(i)), bookV1DTO.getTitle());
-            assertEquals("Author Test".concat(Integer.toString(i)), bookV1DTO.getAuthor());
-            assertNotNull(bookV1DTO.getLaunchDate());
-            assertEquals(new BigDecimal(i), bookV1DTO.getPrice());
+            String link = "links: [</api/v1/books/".concat(String.valueOf(bookDTO.getId())).concat(">;rel=\"self\"]");
+            assertTrue(bookDTO.toString().contains(link));
+            assertEquals("Title Test".concat(Integer.toString(i)), bookDTO.getTitle());
+            assertEquals("Author Test".concat(Integer.toString(i)), bookDTO.getAuthor());
+            assertNotNull(bookDTO.getLaunchDate());
+            assertEquals(new BigDecimal(i), bookDTO.getPrice());
         }
     }
 }

@@ -5,6 +5,7 @@
 package br.com.pedro.exception.handler;
 
 import br.com.pedro.exception.ExceptionResponse;
+import br.com.pedro.exception.InvalidJwtAuthenticationException;
 import br.com.pedro.exception.RequiredObjectIsNullException;
 import br.com.pedro.exception.ResourceNotFoundException;
 import br.com.pedro.exception.UnsupportedMathOperationException;
@@ -48,5 +49,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public final ResponseEntity<ExceptionResponse> handleBadRequestExceptions(RequiredObjectIsNullException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJWTAuthenticationExceptions(InvalidJwtAuthenticationException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }

@@ -4,7 +4,7 @@
  */
 package br.com.pedro.model.entity;
 
-import br.com.pedro.model.dto.v1.BookV1DTO;
+import br.com.pedro.model.v1.dto.BookDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,11 +56,11 @@ public class Book {
     }
 
     // General
-    public void updateValues(BookV1DTO bookV1DTO) {
-        this.title = bookV1DTO.getTitle();
-        this.author = bookV1DTO.getAuthor();
-        this.launchDate = bookV1DTO.getLaunchDate();
-        this.price = bookV1DTO.getPrice();
+    public void updateValues(BookDTO bookDTO) {
+        this.title = bookDTO.getTitle();
+        this.author = bookDTO.getAuthor();
+        this.launchDate = bookDTO.getLaunchDate();
+        this.price = bookDTO.getPrice();
     }
 
     // Getters and setters

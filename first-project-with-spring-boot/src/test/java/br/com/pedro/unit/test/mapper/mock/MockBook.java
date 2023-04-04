@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.pedro.model.entity.Book;
-import br.com.pedro.model.dto.v1.BookV1DTO;
+import br.com.pedro.model.v1.dto.BookDTO;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -15,7 +15,7 @@ public class MockBook {
         return mockEntity(0);
     }
 
-    public BookV1DTO mockDTO() {
+    public BookDTO mockDTO() {
         return mockDTO(0);
     }
 
@@ -27,8 +27,8 @@ public class MockBook {
         return books;
     }
 
-    public List<BookV1DTO> mockDTOList() {
-        List<BookV1DTO> books = new ArrayList<>();
+    public List<BookDTO> mockDTOList() {
+        List<BookDTO> books = new ArrayList<>();
         for (int i = 0; i < 14; i++) {
             books.add(mockDTO(i));
         }
@@ -45,8 +45,8 @@ public class MockBook {
         return book;
     }
 
-    public BookV1DTO mockDTO(Integer number) {
-        BookV1DTO book = new BookV1DTO();
+    public BookDTO mockDTO(Integer number) {
+        BookDTO book = new BookDTO();
         book.setId(number.longValue());
         book.setTitle("Title Test" + number);
         book.setAuthor("Author Test" + number);

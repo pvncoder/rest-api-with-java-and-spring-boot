@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.controller.v1;
+package br.com.pedro.v1.controller;
 
 import br.com.pedro.service.CalculatorService;
 import br.com.pedro.util.ArithmeticUtil;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Hidden
 @RestController
 @RequestMapping("/api/v1/calculator")
-public class CalculatorV1Controller {
+public class CalculatorController {
     
     // GET
     @GetMapping(value = "/sum/{numberOne}/{numberTwo}")

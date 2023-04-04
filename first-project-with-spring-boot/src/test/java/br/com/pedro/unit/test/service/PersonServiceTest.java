@@ -1,7 +1,7 @@
 package br.com.pedro.unit.test.service;
 
 import br.com.pedro.exception.RequiredObjectIsNullException;
-import br.com.pedro.model.dto.v1.PersonV1DTO;
+import br.com.pedro.model.v1.dto.PersonDTO;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -48,7 +48,7 @@ class PersonServiceTest {
 
         when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
 
-        var result = personService.findByIdV1(1L);
+        var result = personService.findById(1L);
         assertNotNull(result);
         assertNotNull(result.getId());
         assertNotNull(result.getLinks());
@@ -68,12 +68,12 @@ class PersonServiceTest {
         Person persisted = entity;
         persisted.setId(1L);
 
-        PersonV1DTO personV1DTO = mockPerson.mockDTO(1);
-        personV1DTO.setId(1L);
+        PersonDTO personDTO = mockPerson.mockDTO(1);
+        personDTO.setId(1L);
 
         when(personRepository.save(entity)).thenReturn(persisted);
 
-        var result = personService.createV1(personV1DTO);
+        var result = personService.create(personDTO);
 
         assertNotNull(result);
         assertNotNull(result.getId());
@@ -88,7 +88,7 @@ class PersonServiceTest {
 
     @Test
     void testCreateWithNullPerson() {
-        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> personService.createV1(null));
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> personService.create(null));
 
         String expectedMessage = "It is not allowed to persist a null object";
         String actualMessage = exception.getMessage();
@@ -103,13 +103,13 @@ class PersonServiceTest {
         Person persisted = entity;
         persisted.setId(1L);
 
-        PersonV1DTO dto = mockPerson.mockDTO(1);
+        PersonDTO dto = mockPerson.mockDTO(1);
         dto.setId(1L);
 
         when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
         when(personRepository.save(entity)).thenReturn(persisted);
 
-        var result = personService.updateV1(dto);
+        var result = personService.update(dto);
 
         assertNotNull(result);
         assertNotNull(result.getId());
@@ -124,7 +124,7 @@ class PersonServiceTest {
 
     @Test
     void testUpdateWithNullPerson() {
-        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> personService.updateV1(null));
+        Exception exception = assertThrows(RequiredObjectIsNullException.class, () -> personService.update(null));
 
         String expectedMessage = "It is not allowed to persist a null object";
         String actualMessage = exception.getMessage();
@@ -139,7 +139,7 @@ class PersonServiceTest {
 
         when(personRepository.findById(1L)).thenReturn(Optional.of(entity));
 
-        personService.deleteV1(1L);
+        personService.delete(1L);
     }
 
     @Test
@@ -148,24 +148,24 @@ class PersonServiceTest {
 
         when(personRepository.findAll()).thenReturn(list);
 
-        var people = personService.findAllV1();
+        var people = personService.findAll();
 
         assertNotNull(people);
         assertEquals(5, people.size());
         
         for (int i = 0; i < people.size(); i++) {
-            PersonV1DTO personV1DTO = people.get(i);
+            PersonDTO personDTO = people.get(i);
             
-            assertNotNull(personV1DTO);
-            assertNotNull(personV1DTO.getId());
-            assertNotNull(personV1DTO.getLinks());
+            assertNotNull(personDTO);
+            assertNotNull(personDTO.getId());
+            assertNotNull(personDTO.getLinks());
 
-            String link = "links: [</api/v1/persons/".concat(String.valueOf(personV1DTO.getId())).concat(">;rel=\"self\"]");
-            assertTrue(personV1DTO.toString().contains(link));
-            assertEquals("Address Test".concat(Integer.toString(i)), personV1DTO.getAddress());
-            assertEquals("First Name Test".concat(Integer.toString(i)), personV1DTO.getFirstName());
-            assertEquals("Last Name Test".concat(Integer.toString(i)), personV1DTO.getLastName());
-            assertEquals(((personV1DTO.getId() % 2) == 0) ? "Male" : "Female", personV1DTO.getGender());
+            String link = "links: [</api/v1/persons/".concat(String.valueOf(personDTO.getId())).concat(">;rel=\"self\"]");
+            assertTrue(personDTO.toString().contains(link));
+            assertEquals("Address Test".concat(Integer.toString(i)), personDTO.getAddress());
+            assertEquals("First Name Test".concat(Integer.toString(i)), personDTO.getFirstName());
+            assertEquals("Last Name Test".concat(Integer.toString(i)), personDTO.getLastName());
+            assertEquals(((personDTO.getId() % 2) == 0) ? "Male" : "Female", personDTO.getGender());
         }
     }
 }

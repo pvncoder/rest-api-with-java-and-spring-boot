@@ -4,13 +4,13 @@
  */
 package br.com.pedro.service;
 
-import br.com.pedro.controller.v1.PersonV1Controller;
+import br.com.pedro.v1.controller.PersonController;
 import br.com.pedro.exception.RequiredObjectIsNullException;
 import br.com.pedro.exception.ResourceNotFoundException;
 import br.com.pedro.mapper.DozerMapper;
 import br.com.pedro.model.entity.Person;
 import br.com.pedro.model.repository.PersonRepository;
-import br.com.pedro.model.dto.v1.PersonV1DTO;
+import br.com.pedro.model.v1.dto.PersonDTO;
 import java.util.List;
 import static java.util.Objects.isNull;
 import org.apache.commons.collections.CollectionUtils;
@@ -34,68 +34,68 @@ public class PersonService {
     private PersonRepository personRepository;
     
     // General
-    public PersonV1DTO createV1(PersonV1DTO personV1DTO) {
+    public PersonDTO create(PersonDTO personDTO) {
         LOGGER.info("Creating one person");
-        if (isNull(personV1DTO)) {
+        if (isNull(personDTO)) {
             throw new RequiredObjectIsNullException();
         }
-        Person personToSave = DozerMapper.parseObject(personV1DTO, Person.class);
+        Person personToSave = DozerMapper.parseObject(personDTO, Person.class);
         Person savedPerson = personRepository.save(personToSave);
-        PersonV1DTO personV1DTOSaved = DozerMapper.parseObject(savedPerson, PersonV1DTO.class);
-        addCreateIdV1HATEOS(personV1DTOSaved);
-        return personV1DTOSaved;
+        PersonDTO personDTOSaved = DozerMapper.parseObject(savedPerson, PersonDTO.class);
+        addCreateIdHATEOS(personDTOSaved);
+        return personDTOSaved;
     }
     
-    public PersonV1DTO updateV1(PersonV1DTO personV1DTO) {
+    public PersonDTO update(PersonDTO personDTO) {
         LOGGER.info("Updating one person");
-        if (isNull(personV1DTO)) {
+        if (isNull(personDTO)) {
             throw new RequiredObjectIsNullException();
         }
-        Person personEntity = personRepository.findById(personV1DTO.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
-        personEntity.updateValues(personV1DTO);
+        Person personEntity = personRepository.findById(personDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        personEntity.updateValues(personDTO);
         Person savedPerson = personRepository.save(personEntity);
-        PersonV1DTO personV1DTOUpdated = DozerMapper.parseObject(savedPerson, PersonV1DTO.class);
-        addUpdateV1HATEOS(personV1DTOUpdated);
-        return personV1DTOUpdated;
+        PersonDTO personDTOUpdated = DozerMapper.parseObject(savedPerson, PersonDTO.class);
+        addUpdateHATEOS(personDTOUpdated);
+        return personDTOUpdated;
     }
     
-    public void deleteV1(Long idPerson) {
+    public void delete(Long idPerson) {
         LOGGER.info("Deleting one person");
         Person personEntity = personRepository.findById(idPerson).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
         personRepository.delete(personEntity);
     }
     
-    public PersonV1DTO findByIdV1(Long idPerson) {
+    public PersonDTO findById(Long idPerson) {
         LOGGER.info("Finding one person");
-        PersonV1DTO personV1DTO = DozerMapper.parseObject(personRepository.findById(idPerson)
-            .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID")), PersonV1DTO.class);
-        addFindByIdV1HATEOS(idPerson, personV1DTO);
-        return personV1DTO;
+        PersonDTO personDTO = DozerMapper.parseObject(personRepository.findById(idPerson)
+            .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID")), PersonDTO.class);
+        addFindByIdHATEOS(idPerson, personDTO);
+        return personDTO;
     }
     
-    public List<PersonV1DTO> findAllV1() {
+    public List<PersonDTO> findAll() {
         LOGGER.info("Finding all persons");
-        List<PersonV1DTO> personsV1DTO = DozerMapper.parseListObjects(personRepository.findAll(), PersonV1DTO.class);
-        addAllV1HATEOS(personsV1DTO);
-        return personsV1DTO;
+        List<PersonDTO> personsDTO = DozerMapper.parseListObjects(personRepository.findAll(), PersonDTO.class);
+        addAllHATEOS(personsDTO);
+        return personsDTO;
     }
     
     // Links
-    private void addUpdateV1HATEOS(PersonV1DTO personV1DTO) {
-        addFindByIdV1HATEOS(personV1DTO.getId(), personV1DTO);
+    private void addUpdateHATEOS(PersonDTO personDTO) {
+        addFindByIdHATEOS(personDTO.getId(), personDTO);
     }
     
-    private void addCreateIdV1HATEOS(PersonV1DTO personV1DTO) {
-        addFindByIdV1HATEOS(personV1DTO.getId(), personV1DTO);
+    private void addCreateIdHATEOS(PersonDTO personDTO) {
+        addFindByIdHATEOS(personDTO.getId(), personDTO);
     }
     
-    private void addAllV1HATEOS(List<PersonV1DTO> personsV1DTO) {
-        if (CollectionUtils.isNotEmpty(personsV1DTO)) {
-            personsV1DTO.forEach(personV1DTO -> addFindByIdV1HATEOS(personV1DTO.getId(), personV1DTO));
+    private void addAllHATEOS(List<PersonDTO> personsDTO) {
+        if (CollectionUtils.isNotEmpty(personsDTO)) {
+            personsDTO.forEach(personDTO -> addFindByIdHATEOS(personDTO.getId(), personDTO));
         }
     }
     
-    private void addFindByIdV1HATEOS(Long id, PersonV1DTO personV1DTO) {
-        personV1DTO.add(linkTo(methodOn(PersonV1Controller.class).findById(id)).withSelfRel());
+    private void addFindByIdHATEOS(Long id, PersonDTO personDTO) {
+        personDTO.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel());
     }
 }

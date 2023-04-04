@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.model.dto.v1;
+package br.com.pedro.model.v1.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ import org.springframework.hateoas.RepresentationModel;
  *
  * @author Pedro Vitor Nunes Arruda
  */
-public class BookV1DTO extends RepresentationModel<BookV1DTO> implements Serializable {
+public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {
 
     // Variables
     private Long id;
@@ -24,10 +24,10 @@ public class BookV1DTO extends RepresentationModel<BookV1DTO> implements Seriali
     private BigDecimal price;
 
     // Constructors
-    public BookV1DTO() {
+    public BookDTO() {
     }
 
-    public BookV1DTO(Long id, String title, String author, Date launchDate, BigDecimal price) {
+    public BookDTO(Long id, String title, String author, Date launchDate, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -95,7 +95,7 @@ public class BookV1DTO extends RepresentationModel<BookV1DTO> implements Seriali
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final BookV1DTO other = (BookV1DTO) obj;
+        final BookDTO other = (BookDTO) obj;
         return Objects.equals(this.id, other.id);
     }
 }
