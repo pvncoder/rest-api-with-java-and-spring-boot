@@ -5,17 +5,18 @@
 package br.com.pedro.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
  * @author Pedro Vitor Nunes Arruda
  */
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException extends RuntimeException {
+@ResponseStatus(HttpStatus.FORBIDDEN)
+public class InvalidJwtAuthenticationException extends AuthenticationException {
 
     // Constructor
-    public ResourceNotFoundException(String message) {
+    public InvalidJwtAuthenticationException(String message) {
         super(message);
     }
 }
