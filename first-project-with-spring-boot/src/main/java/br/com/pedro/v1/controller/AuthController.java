@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author Pedro Vitor Nunes Arruda
+ * @author Pedro Vitor
  */
 @Tag(name = "Authentication Endpoint")
 @RestController
@@ -59,6 +59,7 @@ public class AuthController {
 		return token;
 	}
 
+    // Utils
 	private boolean checkIfParamsIsNotNull(String username, String refreshToken) {
 		return isNull(refreshToken) || refreshToken.isBlank() || isNull(username) || username.isBlank();
 	}

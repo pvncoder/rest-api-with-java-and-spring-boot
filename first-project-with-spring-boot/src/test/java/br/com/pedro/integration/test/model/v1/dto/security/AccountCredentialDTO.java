@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.pedro.model.v1.dto.security;
+package br.com.pedro.integration.test.model.v1.dto.security;
 
 import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;

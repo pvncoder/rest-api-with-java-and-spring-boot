@@ -4,6 +4,7 @@
  */
 package br.com.pedro.integration.test.model.v1.dto;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,24 +12,27 @@ import java.util.Objects;
  *
  * @author Pedro Vitor Nunes Arruda
  */
+@XmlRootElement
 public class PersonDTO implements Serializable {
-    
+
     // Variables
     private Long id;
     private String firstName;
     private String lastName;
     private String address;
     private String gender;
+    private Boolean enabled;
     
     // Constructors
     public PersonDTO() {}
 
-    public PersonDTO(Long id, String firstName, String lastName, String address, String gender) {
+    public PersonDTO(Long id, String firstName, String lastName, String address, String gender, Boolean enabled) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.gender = gender;
+        this.enabled = enabled;
     }
     
     // Getters and setters
@@ -71,7 +75,15 @@ public class PersonDTO implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     // Equals and hashcode
     @Override
     public int hashCode() {

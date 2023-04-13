@@ -37,16 +37,20 @@ public class Person {
     
     @Column(name = "gender", length = 6)
     private String gender;
+    
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
 
     // Constructors
     public Person() {}
     
-    public Person(Long id, String firstName, String lastName, String address, String gender) {
+    public Person(Long id, String firstName, String lastName, String address, String gender, Boolean enabled) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.gender = gender;
+        this.enabled = enabled;
     }
     
     // General
@@ -55,6 +59,7 @@ public class Person {
         this.lastName = personDTO.getLastName();
         this.address = personDTO.getAddress();
         this.gender = personDTO.getGender();
+        this.enabled = personDTO.getEnabled();
     }
 
     // Getters and setters
@@ -96,6 +101,14 @@ public class Person {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     // Equals and Hashcode

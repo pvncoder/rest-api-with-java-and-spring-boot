@@ -4,6 +4,7 @@
  */
 package br.com.pedro.model.v1.dto;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,6 +15,7 @@ import org.springframework.hateoas.RepresentationModel;
  *
  * @author Pedro Vitor Nunes Arruda
  */
+@XmlRootElement
 public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {
 
     // Variables

@@ -11,6 +11,7 @@ import br.com.pedro.mapper.DozerMapper;
 import br.com.pedro.model.entity.Person;
 import br.com.pedro.model.repository.PersonRepository;
 import br.com.pedro.model.v1.dto.PersonDTO;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import static java.util.Objects.isNull;
 import org.apache.commons.collections.CollectionUtils;
@@ -58,6 +59,16 @@ public class PersonService {
         addUpdateHATEOS(personDTOUpdated);
         return personDTOUpdated;
     }
+    
+    @Transactional
+	public PersonDTO disable(Long id) {
+		LOGGER.info("Disabling one person");
+		personRepository.disablePerson(id);
+		Person entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+		PersonDTO vo = DozerMapper.parseObject(entity, PersonDTO.class);
+        addFindByIdHATEOS(id, vo);
+		return vo;
+	}
     
     public void delete(Long idPerson) {
         LOGGER.info("Deleting one person");
